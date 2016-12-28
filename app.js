@@ -13,10 +13,12 @@ var builder = require('botbuilder');
 
 // Create bot and add dialogs
 var connector = new builder.ChatConnector({
-    appId: null,
-    appPassword: null
+    appId: 'e3e45825-cb35-4e1d-8a7e-f2cb86ad36bf',
+    appPassword: 'gdHHc1LB52qpJTtd1AmEnZi'
 });
+
 var bot = new builder.UniversalBot(connector);  
+
 bot.dialog('/', function (session) {
     session.send('Hello World');
 });
