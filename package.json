@@ -4,7 +4,8 @@
   "description": "A bot built on the Microsoft Bot Framework",
   "main": "index.js",
   "dependencies": {
-    "botbuilder": "^3.4.4"
+    "botbuilder": "^3.4.4",
+    "restify": "^4.3.0"
   },
   "devDependencies": {},
   "scripts": {
