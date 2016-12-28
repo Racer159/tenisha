@@ -11,7 +11,7 @@ const _ = require('underscore');
 const util = require('util');
 const request = require('request');
 const image = require('google-images');
-const tokenizer = require('./tokenizer.js');
+const words = require('./tokenizer.js');
 const google = require('google');
 var bot = require('fancy-groupme-bot')(config);
 var shorten_me = require('short-url');
@@ -44,7 +44,7 @@ bot.on('botMessage', function(bot, message) {
 
 	if (tokens.indexOf('tenisha') == 0) {
 
-		if (tokenizer.check( "tenisha what is", tokens )) {
+		if (words.check( "tenisha what is", tokens )) {
 			tokens = _.without(tokens, 'tenisha', 'what', 'is');
 			searchTerm = escape(tokens.join('+'))
 
@@ -62,18 +62,18 @@ bot.on('botMessage', function(bot, message) {
 				bot.message(firstDefinition);
 			}
 			});
-		} else if (tokenizer.check( "tenisha image me", tokens )) {
+		} else if (words.check( "tenisha image me", tokens )) {
 			tokens = _.without(tokens, 'tenisha', 'image', 'me');
 			searchTerm = escape(tokens.join('+'))
 
 			image.search(searchTerm,function(err,images) {
 				bot.message(images[0].url);
 			})
-		} else if (tokenizer.check( "tenisha lunch me", tokens )) {
+		} else if (words.check( "tenisha lunch me", tokens )) {
 			var preText = ['Get yourself some', 'Try some', 'Why not some', 'How about', 'Try']
 			var lunchOptions = ['salad', 'pizza', 'sushi', 'liquid lunch', 'cheesesteaks', 'food cart', 'halal', 'korean', 'mexican', 'chinese', 'vietnamese']
 			bot.message(preText[Math.floor(Math.random() * preText.length)] + " " + lunchOptions[Math.floor(Math.random() * lunchOptions.length)] + "!");
-		} else if (tokenizer.check( "tenisha calories", tokens )) {
+		} else if (words.check( "tenisha calories", tokens )) {
 			tokens = _.without(tokens, 'tenisha', 'calories');
 			var humanSearchTerm = tokens.join(' ');
 			var searchTerm = escape(tokens.join('+'));
@@ -83,7 +83,7 @@ bot.on('botMessage', function(bot, message) {
 				cals = json.hits[0].fields.nf_calories
 				bot.message("A " + humanSearchTerm + " is " + cals + " calories.")
 			});
-		} else if (tokenizer.check( "tenisha metar me", tokens )) {
+		} else if (words.check( "tenisha metar me", tokens )) {
 			tokens = _.without(tokens, 'tenisha', 'metar', 'me');
 			var searchTerm = tokens[0].toUpperCase();
 
@@ -94,17 +94,17 @@ bot.on('botMessage', function(bot, message) {
 					bot.message( "Sorry, that is an invalid airport code." )
 				}
 			});
-		} else if (tokenizer.check( "tenisha help me", tokens )) {
+		} else if (words.check( "tenisha help me", tokens )) {
 			var commands = "gif me, lunch me, tell me a joke, calories,";
 			commands += "spotify me, image me, what is, help me, say, weagle,";
 			commands += "metar me, short url, weather me, insult, google";
 
 			bot.message("Here ya go:\n" + commands);
-		} else if (tokenizer.check( "tenisha say", tokens )) {
+		} else if (words.check( "tenisha say", tokens )) {
 			var msg = message.text.toLowerCase().split(" ");
 			msg = _.without(msg, 'tenisha', 'say');
 			bot.message(msg.join(" "));
-		} else if (tokenizer.check( "tenisha short url", tokens )) {
+		} else if (words.check( "tenisha short url", tokens )) {
 			var msg = message.text.split(" ");
 			msg = _.without(msg, 'tenisha', 'short', 'url');
 			var givenURL = msg[0];
@@ -112,7 +112,7 @@ bot.on('botMessage', function(bot, message) {
 			shorten_me.shorten(givenURL, function(err, url) {
 				bot.message(url);
 			});
-		} else if (tokenizer.check( "tenisha google", tokens )) {
+		} else if (words.check( "tenisha google", tokens )) {
 			var msg = message.text.toLowerCase().split(" ");
 			msg = _.without(msg, 'tenisha', 'google');
 
@@ -121,7 +121,7 @@ bot.on('botMessage', function(bot, message) {
 
 				bot.message(links[0].link);
 			});
-		} else if (tokenizer.check( "tenisha insult", tokens )) {
+		} else if (words.check( "tenisha insult", tokens )) {
 			tokens = _.without(tokens, 'tenisha', 'insult');
 
 			var targetName = tokens[0].charAt(0).toUpperCase() + tokens[0].slice(1);
