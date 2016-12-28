@@ -1,0 +1,26 @@
+{
+  "name": "tenisha",
+  "version": "1.0.0",
+  "description": "A bot built on the Microsoft Bot Framework",
+  "main": "index.js",
+  "dependencies": {
+    "botbuilder": "^3.4.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Racer159/tenisha.git"
+  },
+  "keywords": [
+    "bot"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Racer159/tenisha/issues"
+  },
+  "homepage": "https://github.com/Racer159/tenisha#readme"
+}
