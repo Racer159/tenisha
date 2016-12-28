@@ -5,7 +5,7 @@ const NAME =  process.env['NAME'];
 const URL = process.env['URL'];
 const AVATAR = process.env['AVATAR'];
 
-// Import Libraries
+// Import External Libraries
 const natural = require('natural');
 const _ = require('underscore');
 const util = require('util');
@@ -13,7 +13,6 @@ const request = require('request');
 const image = require('google-images');
 const words = require('./tokenizer.js');
 const google = require('google');
-var bot = require('fancy-groupme-bot')(config);
 var shorten_me = require('short-url');
 
 google.resultsPerPage = 1;
@@ -31,6 +30,7 @@ if (AVATAR) {
 	config.avatar_url = AVATAR;
 }
 
+var bot = require('fancy-groupme-bot')(config);
 
 bot.on('botRegistered', function() {
 	console.log("online");
