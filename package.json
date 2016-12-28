@@ -4,8 +4,12 @@
   "description": "A bot built on the Microsoft Bot Framework",
   "main": "index.js",
   "dependencies": {
-    "botbuilder": "^3.4.4",
-    "restify": "^4.3.0"
+    "google": "^2.1.0",
+    "google-images": "^2.0.0",
+    "natural": "^0.4.0",
+    "request": "^2.79.0",
+    "underscore": "^1.8.3",
+    "util": "^0.10.3"
   },
   "devDependencies": {},
   "scripts": {
