@@ -82,7 +82,15 @@ bot.on('botMessage', function(bot, message) {
 				if (!err && resp.statusCode == 200) {
 					bot.message( body );
 				} else {
-					bot.message( "Sorry, that is an invalid airport code." )
+					bot.message( "Sorry, that is an invalid airport code." );
+				}
+			});
+		} else if (words.check( "tenisha space weather", tokens )) {
+			request('http://services.swpc.noaa.gov/products/alerts.json', function(err, resp, body) {
+				if (!err && resp.statusCode == 200) {
+					bot.message( body[0].message );
+				} else {
+					bot.message( "Sorry, there was an error recieving space weather." );
 				}
 			});
 		} else if (words.check( "tenisha help me", tokens )) {
