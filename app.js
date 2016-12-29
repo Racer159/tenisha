@@ -77,7 +77,7 @@ bot.on('botMessage', function(bot, message) {
 			tokens = _.without(tokens, 'tenisha', 'metar', 'me');
 			var searchTerm = tokens[0].toUpperCase();
 
-			request('http://weather.noaa.gov/pub/data/observations/metar/stations/' + searchTerm + '.TXT', function(err, resp, body){
+			request('http://tgftp.nws.noaa.gov/data/observations/metar/stations/' + searchTerm + '.TXT', function(err, resp, body){
 				if (!err && resp.statusCode == 200) {
 					bot.message( body );
 				} else {
