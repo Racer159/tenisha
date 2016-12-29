@@ -127,7 +127,7 @@ bot.on('botMessage', function(bot, message) {
 		} else {
 			tokens = _.without(tokens, 'tenisha');
 			
-			searchTerm = escape(tokens.join('%20'))
+			searchTerm = escape(tokens.join('+'))
 
 			request('http://api.duckduckgo.com/?q=' + searchTerm + '&format=json', function(error, response, body){
 			resultJSON = JSON.parse(body)
