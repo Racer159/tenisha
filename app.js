@@ -14,8 +14,6 @@ var words = require('./tokenizer.js');
 var shorten_me = require('short-url');
 var fancybot = require('fancy-groupme-bot');
 
-google.resultsPerPage = 1;
-
 // Setup the Tokenizer and GroupMe Config
 var tokenizer = new natural.WordTokenizer();
 
