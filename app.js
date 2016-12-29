@@ -63,13 +63,6 @@ bot.on('botMessage', function(bot, message) {
 				bot.message(firstDefinition);
 			}
 			});
-		} else if (words.check( "tenisha image me", tokens )) {
-			tokens = _.without(tokens, 'tenisha', 'image', 'me');
-			searchTerm = escape(tokens.join('+'))
-
-			image.search(searchTerm,function(err,images) {
-				bot.message(images[0].url);
-			})
 		} else if (words.check( "tenisha lunch me", tokens )) {
 			var preText = ['Get yourself some', 'Try some', 'Why not some', 'How about', 'Try']
 			var lunchOptions = ['salad', 'pizza', 'sushi', 'liquid lunch', 'cheesesteaks', 'food cart', 'halal', 'korean', 'mexican', 'chinese', 'vietnamese']
@@ -96,9 +89,9 @@ bot.on('botMessage', function(bot, message) {
 				}
 			});
 		} else if (words.check( "tenisha help me", tokens )) {
-			var commands = "gif me, lunch me, tell me a joke, calories,";
-			commands += "spotify me, image me, what is, help me, say, weagle,";
-			commands += "metar me, short url, weather me, insult, google";
+			var commands = "lunch me, calories, ";
+			commands += "what is, help me, say, ";
+			commands += "metar me, short url, insult";
 
 			bot.message("Here ya go:\n" + commands);
 		} else if (words.check( "tenisha say", tokens )) {
@@ -112,15 +105,6 @@ bot.on('botMessage', function(bot, message) {
 
 			shorten_me.shorten(givenURL, function(err, url) {
 				bot.message(url);
-			});
-		} else if (words.check( "tenisha google", tokens )) {
-			var msg = message.text.toLowerCase().split(" ");
-			msg = _.without(msg, 'tenisha', 'google');
-
-			google(msg, function(err, next, links){
-				if (err) console.error(err);
-
-				bot.message(links[0].link);
 			});
 		} else if (words.check( "tenisha insult", tokens )) {
 			tokens = _.without(tokens, 'tenisha', 'insult');
