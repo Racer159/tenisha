@@ -28,7 +28,6 @@ if (AVATAR) {
 	config.avatar_url = AVATAR;
 }
 
-var giphy = require('giphy-wrapper')(GIPHYTOKEN);
 var bot = fancybot(config);
 
 bot.on('botRegistered', function() {
@@ -66,12 +65,12 @@ bot.on('botMessage', function(bot, message) {
 			tokens = _.without(tokens, 'tenisha', 'gif', 'me');
 			console.log("searching for " + tokens);
 
-			giphy.search('otters', 20, 0, function(err, data) {
+			request('http://api.giphy.com/v1/gifs/search?q=' + escape(tokens.join('+')) + '&api_key=' + GIPHYTOKEN, function(err, response, body) {
 				if (err) console.error(err);
-				console.log("giphy returned " + util.inspect(data));
+				console.log("giphy returned " + util.inspect(body));
 
-				if (data.data.length) {
-					data = _.shuffle(data.data);
+				if (body.data.length) {
+					data = _.shuffle(body.data);
 					var id = data[0].id;
 					var imageUrl = "http://media3.giphy.com/media/" + id + "/giphy.gif";
 					console.log("sending a message " + imageUrl);
