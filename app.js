@@ -143,7 +143,7 @@ bot.on('botMessage', function(bot, message) {
 					var unk = ['I don\'t know what you\'re talking about.', 'Please try me again at a later time.', 
 						'I can\'t deal with you right now.', 'You have got to be kidding me with that.', 
 						'Please try \'tenisha help me\' to see what I can help you with.',
-						'************************************************************\n*                         WARNING                          *\n*                                                          *\n*     This is a United States Government Computer.  Use of *\n*     this computer for purposes for which authorization   *\n*     has not been extended is a violation of federal law. *\n*                                                          *\n*                   (Reference Public Law 99-474)          *\n*                                                          *\n************************************************************'
+						'*******************************************************\n* WARNING\n*\n* This is a United States Government Computer.  Use of\n* this computer for purposes for which authorization\n* has not been extended is a violation of federal law.\n*\n* (Reference Public Law 99-474)\n*\n*******************************************************'
 						];
 					
 					bot.message(unk[Math.floor(Math.random() * unk.length)]);
