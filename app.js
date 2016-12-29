@@ -41,8 +41,8 @@ bot.on('botMessage', function(bot, message) {
 
 	if (tokens.indexOf('tenisha') == 0) {
 
-		if (words.check( "tenisha what is", tokens )) {
-			tokens = _.without(tokens, 'tenisha', 'what', 'is');
+		if (words.check( "tenisha what is", tokens ) || words.check( "tenisha define", tokens )) {
+			tokens = _.without(tokens, 'tenisha', 'what', 'is', 'define');
 			searchTerm = escape(tokens.join('+'))
 
 			request('http://api.urbandictionary.com/v0/define?term=' + searchTerm, function(error, response, body){
