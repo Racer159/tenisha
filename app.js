@@ -131,13 +131,13 @@ bot.on('botMessage', function(bot, message) {
 
 			request('http://api.duckduckgo.com/?q=' + searchTerm + '&format=json', function(error, response, body){
 			resultJSON = JSON.parse(body)
-			if (resultJSON["AbstractText"] != "") {
+			if (resultJSON["Answer"] != "") {
+				bot.message(resultJSON["Answer"]);
+			} else if (resultJSON["AbstractText"] != "") {
 				bot.message(resultJSON["AbstractText"]);
 			} else if (resultJSON["Definition"] != "") {
 				bot.message(resultJSON["Definition"]);
-			} else if (resultJSON["Answer"] != "") {
-				bot.message(resultJSON["Answer"]);
-			} else {
+			} else  {
 				var unk = ['I don\'t know what you\'re talking about.', 'Please try me again at a later time.', 
 					'I can\'t deal with you right now.', 'You have got to be kidding me with that.', 
 					'Please try \'tenisha help me\' to see what I can help you with.'];
