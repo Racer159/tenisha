@@ -85,7 +85,7 @@ bot.on('botMessage', function(bot, message) {
 				}
 			});
 		} else if (words.check( "tenisha help me", tokens )) {
-			var commands = "lunch me, calories, ";
+			var commands = "Ask me any of the following: lunch me, calories, ";
 			commands += "what is, help me, say, ";
 			commands += "metar me, short url, insult";
 
@@ -125,7 +125,26 @@ bot.on('botMessage', function(bot, message) {
 
 			bot.message(targetName + " is a " + one + " " + two + " " + three + "!");
 		} else {
-			 // Do nothing.
+			tokens = _.without(tokens, 'tenisha');
+			
+			searchTerm = escape(tokens.join('%20'))
+
+			request('http://api.duckduckgo.com/?q=' + searchTerm + '&format=json', function(error, response, body){
+			resultJSON = JSON.parse(body)
+			if (resultJSON["AbstractText"] != "") {
+				bot.message(resultJSON["AbstractText"]);
+			} else if (resultJSON["Definition"] != "") {
+				bot.message(resultJSON["Definition"]);
+			} else if (resultJSON["Answer"] != "") {
+				bot.message(resultJSON["Answer"]);
+			} else {
+				var unk = ['I don\'t know what you\'re talking about.', 'Please try me again at a later time.', 
+					'I can\'t deal with you right now.', 'You have got to be kidding me with that.', 
+					'Please try \'tenisha help me\' to see what I can help you with.'];
+				
+				bot.message(unk[Math.floor(Math.random() * unk.length)]);
+			}
+			});
 		}
 	}
 });
