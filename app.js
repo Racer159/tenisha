@@ -68,9 +68,10 @@ bot.on('botMessage', function(bot, message) {
 			request('http://api.giphy.com/v1/gifs/search?q=' + escape(tokens.join('+')) + '&api_key=' + GIPHYTOKEN, function(err, response, body) {
 				if (err) console.error(err);
 				console.log("giphy returned " + util.inspect(body));
-
-				if (body.data.length) {
-					data = _.shuffle(body.data);
+				
+				resultJSON = JSON.parse(body);
+				if (resultJSON.data.length) {
+					data = _.shuffle(resultJSON.data);
 					var id = data[0].id;
 					var imageUrl = "http://media3.giphy.com/media/" + id + "/giphy.gif";
 					console.log("sending a message " + imageUrl);
