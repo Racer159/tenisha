@@ -80,6 +80,24 @@ bot.on('botMessage', function(bot, message) {
 					bot.message("Sorry couldn't find anything!");
 				}
 			});
+		} else if (words.check( "tenisha translate", tokens )) {
+			tokens = _.without(tokens, 'tenisha', 'translate');
+			console.log("searching for " + tokens);
+
+			request('http://api.giphy.com/v1/gifs/translate?s=' + escape(tokens.join('+')) + '&api_key=' + GIPHYTOKEN, function(err, response, body) {
+				if (err) console.error(err);
+				console.log("giphy returned " + util.inspect(body));
+				
+				resultJSON = JSON.parse(body);
+				if (resultJSON.data.length) {
+					var id = data[0].id;
+					var imageUrl = "http://media3.giphy.com/media/" + id + "/giphy.gif";
+					console.log("sending a message " + imageUrl);
+					bot.message(imageUrl);
+				} else {
+					bot.message("Sorry couldn't find anything!");
+				}
+			});
 		} else if (words.check( "tenisha lunch me", tokens )) {
 			var preText = ['Get yourself some', 'Try some', 'Why not some', 'How about', 'Try']
 			var lunchOptions = ['salad', 'pizza', 'sushi', 'liquid lunch', 'cheesesteaks', 'food cart', 'halal', 'korean', 'mexican', 'chinese', 'vietnamese']
