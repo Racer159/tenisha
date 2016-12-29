@@ -108,14 +108,15 @@ bot.on('botMessage', function(bot, message) {
 		} else if (words.check( "tenisha space weather", tokens )) {
 			request('http://services.swpc.noaa.gov/products/alerts.json', function(err, resp, body) {
 				if (!err && resp.statusCode == 200) {
-					bot.message( body[0].message );
+					resultJSON = JSON.parse(body);
+					bot.message( resultJSON[0].message );
 				} else {
 					bot.message( "Sorry, there was an error recieving space weather." );
 				}
 			});
 		} else if (words.check( "tenisha help me", tokens )) {
 			var commands = "Ask me any of the following: lunch me, calories, ";
-			commands += "what is, help me, say, ";
+			commands += "what is, help me, say, gif me, space weather, ";
 			commands += "metar me, short url, insult";
 
 			bot.message("Here ya go:\n" + commands);
