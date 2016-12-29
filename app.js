@@ -32,7 +32,6 @@ var bot = fancybot(config);
 
 bot.on('botRegistered', function() {
 	console.log("online");
-	bot.message("Hey y'all. Hit me up at 'tenisha' if you need me.");
 });
 
 bot.on('botMessage', function(bot, message) {
