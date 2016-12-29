@@ -10,9 +10,7 @@ var natural = require('natural');
 var _ = require('underscore');
 var util = require('util');
 var request = require('request');
-var image = require('google-images');
 var words = require('./tokenizer.js');
-var google = require('google');
 var shorten_me = require('short-url');
 var fancybot = require('fancy-groupme-bot');
 
