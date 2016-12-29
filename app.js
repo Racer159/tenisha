@@ -128,26 +128,30 @@ bot.on('botMessage', function(bot, message) {
 		} else {
 			tokens = _.without(tokens, 'tenisha');
 			
-			searchTerm = escape(tokens.join('+'))
+			if (tokens.length > 0) {
+				searchTerm = escape(tokens.join('+'))
 
-			request('http://api.duckduckgo.com/?q=' + searchTerm + '&format=json', function(error, response, body){
-			resultJSON = JSON.parse(body)
-			if (resultJSON["Answer"] != "") {
-				bot.message(resultJSON["Answer"].replace(/(<([^>]+)>)/ig,''));
-			} else if (resultJSON["AbstractText"] != "") {
-				bot.message(resultJSON["AbstractText"].replace(/(<([^>]+)>)/ig,''));
-			} else if (resultJSON["Definition"] != "") {
-				bot.message(resultJSON["Definition"].replace(/(<([^>]+)>)/ig,''));
-			} else  {
-				var unk = ['I don\'t know what you\'re talking about.', 'Please try me again at a later time.', 
-					'I can\'t deal with you right now.', 'You have got to be kidding me with that.', 
-					'Please try \'tenisha help me\' to see what I can help you with.',
-					'************************************************************\n*                         WARNING                          *\n*                                                          *\n*     This is a United States Government Computer.  Use of *\n*     this computer for purposes for which authorization   *\n*     has not been extended is a violation of federal law. *\n*                                                          *\n*                   (Reference Public Law 99-474)          *\n*                                                          *\n************************************************************'
-					];
-				
-				bot.message(unk[Math.floor(Math.random() * unk.length)]);
+				request('http://api.duckduckgo.com/?q=' + searchTerm + '&format=json', function(error, response, body){
+				resultJSON = JSON.parse(body)
+				if (resultJSON["Answer"] != "") {
+					bot.message(resultJSON["Answer"].replace(/(<([^>]+)>)/ig,''));
+				} else if (resultJSON["AbstractText"] != "") {
+					bot.message(resultJSON["AbstractText"].replace(/(<([^>]+)>)/ig,''));
+				} else if (resultJSON["Definition"] != "") {
+					bot.message(resultJSON["Definition"].replace(/(<([^>]+)>)/ig,''));
+				} else  {
+					var unk = ['I don\'t know what you\'re talking about.', 'Please try me again at a later time.', 
+						'I can\'t deal with you right now.', 'You have got to be kidding me with that.', 
+						'Please try \'tenisha help me\' to see what I can help you with.',
+						'************************************************************\n*                         WARNING                          *\n*                                                          *\n*     This is a United States Government Computer.  Use of *\n*     this computer for purposes for which authorization   *\n*     has not been extended is a violation of federal law. *\n*                                                          *\n*                   (Reference Public Law 99-474)          *\n*                                                          *\n************************************************************'
+						];
+					
+					bot.message(unk[Math.floor(Math.random() * unk.length)]);
+				}
+				});
+			} else {
+				bot.message('Please try \'tenisha help me\' to see what I can help you with.');
 			}
-			});
 		}
 	}
 });
