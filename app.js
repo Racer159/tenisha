@@ -4,6 +4,7 @@ const GROUP = process.env['GROUP'];
 const NAME =  process.env['NAME'];
 const URL = process.env['URL'];
 const AVATAR = process.env['AVATAR'];
+const GIPHYTOKEN = 'dc6zaTOxFJmzC';
 
 // Import External Libraries
 var natural = require('natural');
@@ -27,6 +28,7 @@ if (AVATAR) {
 	config.avatar_url = AVATAR;
 }
 
+var giphy = require('giphy-wrapper')(GIPHYTOKEN);
 var bot = fancybot(config);
 
 bot.on('botRegistered', function() {
@@ -60,7 +62,26 @@ bot.on('botMessage', function(bot, message) {
 				bot.message(firstDefinition);
 			}
 			});
-		} else if (words.check( "tenisha lunch me", tokens )) {
+		} else if (words.check( "tenisha gif me", tokens )) {
+          tokens = _.without(tokens, 'tenisha', 'gif', 'me');
+          console.log("searching for " + tokens);
+
+          giphy.search(escape(tokens.join('+')), 20, 0, function(err, data) {
+
+            if (err) console.error(err);
+            console.log("giphy returned " + util.inspect(data));
+
+            if (data.data.length) {
+              data = _.shuffle(data.data);
+              var id = data[0].id;
+              var imageUrl = "http://media3.giphy.com/media/" + id + "/giphy.gif";
+              console.log("sending a message " + imageUrl);
+              bot.message(imageUrl);
+            } else {
+              bot.message("Sorry couldn't find anything!")
+            }
+          });
+      } else if (words.check( "tenisha lunch me", tokens )) {
 			var preText = ['Get yourself some', 'Try some', 'Why not some', 'How about', 'Try']
 			var lunchOptions = ['salad', 'pizza', 'sushi', 'liquid lunch', 'cheesesteaks', 'food cart', 'halal', 'korean', 'mexican', 'chinese', 'vietnamese']
 			bot.message(preText[Math.floor(Math.random() * preText.length)] + " " + lunchOptions[Math.floor(Math.random() * lunchOptions.length)] + "!");
