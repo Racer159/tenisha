@@ -1,4 +1,4 @@
 tenisha
 =======
 
-A bot built on the Microsoft Bot Framework that is able to complete a variety of actions.
+A bot built for GroupMe groups based on the fancy-groupme-bot node library.
