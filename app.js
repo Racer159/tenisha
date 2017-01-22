@@ -134,12 +134,19 @@ bot.on('botMessage', function(bot, message) {
 		} else if (words.check( "tenisha help me", tokens )) {
 			var commands = "Ask me any of the following: lunch me, calories, ";
 			commands += "what is, help me, say, gif me, space weather, ";
-			commands += "metar me, short url, insult";
+			commands += "metar me, short url, insult, translate";
 
 			bot.message("Here ya go:\n" + commands);
 		} else if (words.check( "tenisha say", tokens )) {
 			var msg = message.text.toLowerCase().split(" ");
 			msg = _.without(msg, 'tenisha', 'say');
+			var searchTerm = escape(msg.join(' '));
+			
+			request('http://api.funtranslations.com/translate/jive.json?text=' + searchTerm, function(err, resp, body){
+				json = eval("(" + body + ')');
+				var jive = json.translated;
+				bot.message(jive);
+			}
 			bot.message(msg.join(" "));
 		} else if (words.check( "tenisha short url", tokens )) {
 			var msg = message.text.split(" ");
