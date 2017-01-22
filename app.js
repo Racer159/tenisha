@@ -145,7 +145,7 @@ bot.on('botMessage', function(bot, message) {
 			request('http://api.funtranslations.com/translate/jive.json?text=' + searchTerm, function(err, resp, body){
 				if (!err && resp.statusCode == 200) {
 					json = eval('(' + body + ')');
-					var jive = json.translated;
+					var jive = json.contents.translated;
 					bot.message(jive);
 				} else {
 					bot.message( "Ah don't know whatchu is talkin 'bout!" );
