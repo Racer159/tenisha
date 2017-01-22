@@ -143,11 +143,14 @@ bot.on('botMessage', function(bot, message) {
 			var searchTerm = escape(msg.join(' '));
 			
 			request('http://api.funtranslations.com/translate/jive.json?text=' + searchTerm, function(err, resp, body){
-				json = eval("(" + body + ')');
-				var jive = json.translated;
-				bot.message(jive);
-			}
-			bot.message(msg.join(" "));
+				if (!err && resp.statusCode == 200) {
+					json = eval('(' + body + ')');
+					var jive = json.translated;
+					bot.message(jive);
+				} else {
+					bot.message( "Ah don't know whatchu is talkin 'bout!" );
+				}
+			});
 		} else if (words.check( "tenisha short url", tokens )) {
 			var msg = message.text.split(" ");
 			msg = _.without(msg, 'tenisha', 'short', 'url');
